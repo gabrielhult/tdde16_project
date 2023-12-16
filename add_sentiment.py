@@ -11,17 +11,19 @@ def add_sentiment():
     data = data.dropna()
     data = data.reset_index(drop=True)
 
-    # Create sentiment column
-    data['sentiment'] = np.nan
+    # Create sentiment column if it doesn't exist
+    if 'sentiment' not in data.columns:
+        data['sentiment'] = np.nan
 
     analyser = SentimentIntensityAnalyzer()
 
-    # Create sentiment column
+    # Add sentiment data to sentiment column
     for i in range(len(data)):
-        data['sentiment'][i] = analyser.polarity_scores(data['Title'][i])
+        sentiment_scores = analyser.polarity_scores(data['Title'][i])
+        data.at[i, 'sentiment'] = str(sentiment_scores)  # Convert dictionary to string
 
-    sentiment_file_name = 'data_sentiment.csv'
     # Save data
+    sentiment_file_name = 'sentiment_posts.csv'
     data.to_csv(sentiment_file_name, index=False)
 
     # Plot sentiment

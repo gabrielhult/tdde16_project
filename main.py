@@ -1,8 +1,10 @@
 import add_sentiment as asent
+import pandas as pd
 
 def initVader():
     sent_dataset = asent.add_sentiment()
-    print(sent_dataset)
+    data = pd.read_csv(sent_dataset)
+    print(data.head())
 
 
 
