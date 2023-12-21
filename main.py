@@ -26,5 +26,5 @@ def split_dataset():
 
 
 if __name__ == "__main__":
-    preprocess_data()
+    #preprocess_data()
     split_dataset()
