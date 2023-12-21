@@ -23,6 +23,7 @@ Install the necessary dependencies by running the following command:
     `
 
 ## Run the Program
+
 To run the program, run the following command:
     `
     python main.py

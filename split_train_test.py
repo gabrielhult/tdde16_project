@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def split_data():
     # Load data
-    data = pd.read_csv('reddit_posts.csv')
+    data = pd.read_csv('reddit_posts/reddit_posts.csv')
     print(data.head())
     data = data.dropna()
     data = data.reset_index(drop=True)
