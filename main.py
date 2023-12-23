@@ -1,5 +1,6 @@
 import preprocess as pre
 import split_train_test as stt
+import vectorisation as vec
 import pandas as pd
 import os
 
@@ -24,7 +25,11 @@ def split_dataset():
     print(test_data.head())
 
 
+def vectorise():
+    vec.vectorise_data()
+
 
 if __name__ == "__main__":
     #preprocess_data()
     split_dataset()
+    vectorise()

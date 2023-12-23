@@ -11,8 +11,7 @@
     - [x] 20% test set
 
 3. Feature extraction
-    - [ ] Bag of words
-    - [ ] TF-IDF
+    - [x] TF-IDF
 
 4. Implement the Naive Bayes classifier.
     - [ ] Multinomial Naive Bayes
