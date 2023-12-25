@@ -1,11 +1,13 @@
 import os
 import pickle
-import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import seaborn as sns
+from data_utils import data_mapping as dm
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-from data_utils import data_mapping as dm
-import seaborn as sns
+
 
 def multinomial():
     train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
@@ -15,7 +17,7 @@ def multinomial():
 
     # Predict
     predicted = model.predict(test_data)
-    print(predicted)
+    # print(predicted)
 
     # Evaluate
     accuracy = accuracy_score(test_labels_mapped, predicted)
@@ -35,7 +37,8 @@ def multinomial():
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Multinomial Naive Bayes Classifier')
-    plt.show()
+    plt.savefig('/home/gult/tdde16_project/graphs/multi_confusion_matrix.png')
+    # plt.show()
 
     # Save model
     model_file_name = 'multinomial_bayes.sav'
@@ -51,7 +54,7 @@ def bernoulli():
 
     # Predict
     predicted = model.predict(test_data)
-    print(predicted)
+    # print(predicted)
 
     # Evaluate
     accuracy = accuracy_score(test_labels_mapped, predicted)
@@ -71,7 +74,8 @@ def bernoulli():
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Bernoulli Naive Bayes Classifier')
-    plt.show()
+    plt.savefig('/home/gult/tdde16_project/graphs/bernoulli_confusion_matrix.png')
+    # plt.show()
 
     # Save model
     model_file_name = 'bernoulli_bayes.sav'
