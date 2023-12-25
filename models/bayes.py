@@ -103,24 +103,27 @@ def decisive_words(model, vectoriser, model_name):
 
     # Sort the features based on the log probability differences for liberal
     sorted_indices_liberal = np.argsort(log_prob_diff_liberal)[::-1]
+    
     # Get the top N words and their corresponding log probability differences for liberal
     top_words_with_log_prob_diff_liberal = list(zip(feature_names[sorted_indices_liberal][:top_n_words],
                                                     log_prob_diff_liberal[sorted_indices_liberal][:top_n_words]))
 
     # Sort the features based on the log probability differences for conservative
     sorted_indices_conservative = np.argsort(log_prob_diff_conservative)[::-1]
+
     # Get the top N words and their corresponding log probability differences for conservative
     top_words_with_log_prob_diff_conservative = list(zip(feature_names[sorted_indices_conservative][:top_n_words],
                                                     log_prob_diff_conservative[sorted_indices_conservative][:top_n_words]))
 
     # Save the top words with their log probability differences for liberal to a text file
-    with open(f"{model_name}_liberal_words.txt", "w") as file:
+    output_file_path = os.path.join('top_words', f"{model_name}_liberal_words.txt")
+    with open(output_file_path, "w") as file:
         file.write(f"Top {top_n_words} words for classifying as 'liberal':\n")
         for word, log_prob_diff_value in top_words_with_log_prob_diff_liberal:
             file.write(f"Word: {word}, Log Probability Difference: {log_prob_diff_value}\n")
 
     # Save the top words with their log probability differences for conservative to a text file
-    with open(f"{model_name}_conservative_words.txt", "w") as file:
-        file.write(f"Top {top_n_words} words for classifying as 'conservative':\n")
+    output_file_path = os.path.join('top_words', f"{model_name}_conservative_words.txt")
+    with open(output_file_path, "w") as file:
         for word, log_prob_diff_value in top_words_with_log_prob_diff_conservative:
             file.write(f"Word: {word}, Log Probability Difference: {log_prob_diff_value}\n")

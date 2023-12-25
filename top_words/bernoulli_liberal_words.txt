@@ -1,0 +1,11 @@
+Top 10 words for classifying as 'liberal':
+Word: commie, Log Probability Difference: 2.7534157043902776
+Word: nap, Log Probability Difference: 2.704625540220846
+Word: ancap, Log Probability Difference: 2.6266639987511335
+Word: bitcoin, Log Probability Difference: 2.59926502456302
+Word: libertarianism, Log Probability Difference: 2.599265024563019
+Word: permission, Log Probability Difference: 2.481481988906636
+Word: milton, Log Probability Difference: 2.3479505962821134
+Word: collectivist, Log Probability Difference: 2.3479505962821134
+Word: ancaps, Log Probability Difference: 2.3479505962821134
+Word: friedman, Log Probability Difference: 2.3479505962821134

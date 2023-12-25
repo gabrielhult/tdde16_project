@@ -57,7 +57,8 @@ def decisive_words(model, vectoriser, model_name):
     top_n_words = 10
 
     # Display top words for each class
-    for class_index in [0, 1]:
+    for class_index in range(coefficients.shape[0]):
+        
         # Sort the features based on the coefficients for the current class
         sorted_indices_svc = np.argsort(coefficients[class_index])[::-1]
 
@@ -67,7 +68,8 @@ def decisive_words(model, vectoriser, model_name):
 
         # Save the top words with their log probability differences to a text file
         label_name = "liberal" if class_index == 0 else "conservative"
-        with open(f"{model_name}_{label_name}_words.txt", "w") as file:
+        output_file_path = os.path.join('top_words', f"{model_name}_{label_name}_words.txt")
+        with open(output_file_path, "w") as file:
             file.write(f"Top {top_n_words} words for classifying as '{label_name}':\n")
             for word, coefficient_value in top_words_with_coefficients_svc:
                 file.write(f"Word: {word}, Coefficient: {coefficient_value}\n")

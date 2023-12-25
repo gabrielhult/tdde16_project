@@ -1,0 +1,11 @@
+Top 10 words for classifying as 'liberal':
+Word: democratic, Coefficient: 1.9841429015261125
+Word: progressive, Coefficient: 1.6742924362040368
+Word: socialist, Coefficient: 1.626036538558405
+Word: worker, Coefficient: 1.5057944131832321
+Word: woman, Coefficient: 1.4099901057596695
+Word: fund, Coefficient: 1.4060998115243715
+Word: implement, Coefficient: 1.3351362081292528
+Word: housing, Coefficient: 1.195027671853464
+Word: healthcare, Coefficient: 1.1911247809498628
+Word: social, Coefficient: 1.1908325316569688

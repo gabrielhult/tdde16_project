@@ -51,6 +51,9 @@ def decisive_words(model, vectoriser, model_name):
     # Get feature importances from the trained model for both classes
     importances = model.feature_importances_
 
+    # Convert importances to 2-dimensional array
+    importances = importances.reshape(1, -1)
+
     # Get the feature names (words)
     feature_names = np.array(vectoriser.get_feature_names_out())
 
@@ -64,16 +67,13 @@ def decisive_words(model, vectoriser, model_name):
 
         # Get the top N words and their corresponding importances for the current class
         top_words_with_importances_rf = list(zip(feature_names[sorted_indices_rf][:top_n_words],
-                                                importances[sorted_indices_rf][:top_n_words, class_index]))
+                                                importances[0, sorted_indices_rf][:top_n_words]))
 
-        # Print or analyze the top words with their importances for the current class
         label_name = "liberal" if class_index == 0 else "conservative"
-        print(f"Top {top_n_words} words for RandomForestClassifier predicting '{label_name}':")
-        for word, importance_value in top_words_with_importances_rf:
-            print(f"Word: {word}, Importance: {importance_value}")
 
         # Save the top words with their log probability differences to a text file
-        with open(f"{model_name}_{label_name}_words.txt", "w") as file:
+        output_file_path = os.path.join('top_words', f"{model_name}_{label_name}_words.txt")
+        with open(output_file_path, "w") as file:
             file.write(f"Top {top_n_words} words for classifying as '{label_name}':\n")
             for word, importance_value in top_words_with_importances_rf:
                 file.write(f"Word: {word}, Importance: {importance_value}\n")
