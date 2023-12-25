@@ -14,23 +14,23 @@
     - [x] TF-IDF
 
 4. Implement the Naive Bayes classifier.
-    - [ ] Multinomial Naive Bayes
-    - [ ] Bernoulli Naive Bayes
+    - [x] Multinomial Naive Bayes
+    - [x] Bernoulli Naive Bayes
 
 5. Implement the SVM classifier.
-    - [ ] Linear SVM
-    - [ ] Radial Basis Function (RBF) SVM
+    - [x] Linear SVM
+    - [x] Radial Basis Function (RBF) SVM
 
 6. Implement the Random Forest classifier.
-    - [ ] Random Forest
+    - [x] Random Forest
 
 7. Train and test the classifiers.
 
 8. Evaluate the classifiers.
-    - [ ] Accuracy
-    - [ ] Precision
-    - [ ] Recall
-    - [ ] F1-score
+    - [x] Accuracy
+    - [x] Precision
+    - [x] Recall
+    - [x] F1-score
     - [ ] Confusion matrix
 
 9. Feature Importance Analysis:

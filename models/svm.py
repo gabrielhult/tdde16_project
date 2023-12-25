@@ -3,34 +3,41 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import os
 import pickle
-
-
+import matplotlib.pyplot as plt
+from data_utils import data_mapping as dm
 
 
 def linear():
-    # Load data
-    train_data = pd.read_csv('data/x_train_data.csv')
-    test_data = pd.read_csv('data/x_test_data.csv')
-    train_labels = pd.read_csv('data/y_train_data.csv')
-    test_labels = pd.read_csv('data/y_test_data.csv')
-    print(train_data.head())
-    print(test_data.head())
-    print(train_labels.head())
-    print(test_labels.head())
+    train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
 
     # Train model
-    model = LinearSVC().fit(train_data, train_labels.values.ravel())
+    model = LinearSVC().fit(train_data, train_labels_mapped.values.ravel())
 
     # Predict
     predicted = model.predict(test_data)
     print(predicted)
 
     # Evaluate
-    print(f"Linear SVM Classifier:")
-    print(f"Accuracy: {accuracy_score(test_labels, predicted)}")
-    print(f"Precision: {precision_score(test_labels, predicted)}")
-    print(f"Recall: {recall_score(test_labels, predicted)}")
-    print(f"F1: {f1_score(test_labels, predicted)}")
+    accuracy = accuracy_score(test_labels_mapped, predicted)
+    precision = precision_score(test_labels_mapped, predicted, average='binary')
+    recall = recall_score(test_labels_mapped, predicted)
+    f1 = f1_score(test_labels_mapped, predicted)
+    print(f"Accuracy: {round(accuracy, 3)}")
+    print(f"Precision: {round(precision, 3)}")
+    print(f"Recall: {round(recall, 3)}")
+    print(f"F1: {round(f1, 3)}")
+
+    # Visualize results
+    # metrics = ['Accuracy', 'Precision', 'Recall', 'F1']
+    # scores = [accuracy, precision, recall, f1]
+    # plt.bar(metrics, scores)
+    # plt.xlabel('Metrics')
+    # plt.ylabel('Scores')
+    # plt.title('Linear SVM Classifier Results')
+    plt.show()
+
+    # for metric, score in zip(metrics, scores):
+    #     plt.text(metric, score, f'{score:.2f}', ha='center', va='bottom')
 
     # Save model
     model_file_name = 'linear_svm.sav'
@@ -39,29 +46,36 @@ def linear():
     
 
 def rbf():
-    # Load data
-    train_data = pd.read_csv('data/x_train_data.csv')
-    test_data = pd.read_csv('data/x_test_data.csv')
-    train_labels = pd.read_csv('data/y_train_data.csv')
-    test_labels = pd.read_csv('data/y_test_data.csv')
-    print(train_data.head())
-    print(test_data.head())
-    print(train_labels.head())
-    print(test_labels.head())
+    train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
 
     # Train model
-    model = LinearSVC().fit(train_data, train_labels.values.ravel())
+    model = LinearSVC().fit(train_data, train_labels_mapped.values.ravel())
 
     # Predict
     predicted = model.predict(test_data)
     print(predicted)
 
     # Evaluate
-    print(f"RBF SVM Classifier:")
-    print(f"Accuracy: {accuracy_score(test_labels, predicted)}")
-    print(f"Precision: {precision_score(test_labels, predicted)}")
-    print(f"Recall: {recall_score(test_labels, predicted)}")
-    print(f"F1: {f1_score(test_labels, predicted)}")
+    accuracy = accuracy_score(test_labels_mapped, predicted)
+    precision = precision_score(test_labels_mapped, predicted, average='binary')
+    recall = recall_score(test_labels_mapped, predicted)
+    f1 = f1_score(test_labels_mapped, predicted)
+    print(f"Accuracy: {round(accuracy, 3)}")
+    print(f"Precision: {round(precision, 3)}")
+    print(f"Recall: {round(recall, 3)}")
+    print(f"F1: {round(f1, 3)}")
+
+    # Visualize results
+    # metrics = ['Accuracy', 'Precision', 'Recall', 'F1']
+    # scores = [accuracy, precision, recall, f1]
+    # plt.bar(metrics, scores)
+    # plt.xlabel('Metrics')
+    # plt.ylabel('Scores')
+    # plt.title('RBF SVM Classifier Results')
+    plt.show()
+
+    # for metric, score in zip(metrics, scores):
+    #     plt.text(metric, score, f'{score:.2f}', ha='center', va='bottom')
 
     # Save model
     model_file_name = 'rbf_svm.sav'

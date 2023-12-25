@@ -2,6 +2,7 @@ from data_utils import load_data as ld
 from preprocess import pre_process as pre, split_data as stt, vectorise_data as vec 
 from models.bayes import multinomial, bernoulli
 from models.svm import linear, rbf
+from models.random_forest import forest
 import pandas as pd
 import os
 
@@ -41,10 +42,14 @@ def svm():
     linear()
     rbf()
 
+def random_forest():
+    forest()
+
 
 if __name__ == "__main__":
     #preprocess_data()
     split_dataset()
     vectorise()
     bayes()
-    #svm()
+    svm()
+    random_forest()
