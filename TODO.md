@@ -19,7 +19,6 @@
 
 5. Implement the SVM classifier.
     - [x] Linear SVM
-    - [x] Radial Basis Function (RBF) SVM
 
 6. Implement the Random Forest classifier.
     - [x] Random Forest
@@ -31,7 +30,7 @@
     - [x] Precision
     - [x] Recall
     - [x] F1-score
-    - [ ] Confusion matrix
+    - [x] Confusion matrix
 
 9. Feature Importance Analysis:
     - [ ] If available for the chosen classifiers, analyze feature importance to identify key words or features that contribute most to the classification.
