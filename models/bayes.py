@@ -20,19 +20,23 @@ def multinomial():
     train_data = vectoriser.transform(train_data['Title_Text'])
     test_data = vectoriser.transform(test_data['Title_Text'])
 
+    # Map class labels to numerical values
+    class_mapping = {'Conservative': 0, 'Liberal': 1}
+    train_labels_mapped = train_labels['Political Lean'].map(class_mapping)
+    test_labels_mapped = test_labels['Political Lean'].map(class_mapping)
+
     # Train model
-    model = MultinomialNB().fit(train_data, train_labels.values.ravel())
+    model = MultinomialNB().fit(train_data, train_labels_mapped.values.ravel())
 
     # Predict
     predicted = model.predict(test_data)
     print(predicted)
 
     # Evaluate
-    print("CHECKEC", test_labels, predicted)
-    accuracy = accuracy_score(test_labels, predicted)
-    precision = precision_score(test_labels, predicted, average='binary')
-    recall = recall_score(test_labels, predicted)
-    f1 = f1_score(test_labels, predicted)
+    accuracy = accuracy_score(test_labels_mapped, predicted)
+    precision = precision_score(test_labels_mapped, predicted, average='binary')
+    recall = recall_score(test_labels_mapped, predicted)
+    f1 = f1_score(test_labels_mapped, predicted)
     print(f"Multinomial Naive Bayes Classifier:")
     print(f"Accuracy: {accuracy}")
     print(f"Precision: {precision}")
@@ -58,29 +62,36 @@ def multinomial():
 
 
 def bernoulli():
-    # Load data
     train_data = pd.read_csv('data/x_train_data.csv')
     test_data = pd.read_csv('data/x_test_data.csv')
     train_labels = pd.read_csv('data/y_train_data.csv')
     test_labels = pd.read_csv('data/y_test_data.csv')
-    print(train_data.head())
-    print(test_data.head())
-    print(train_labels.head())
-    print(test_labels.head())
+
+    # Load vectorizer
+    with open('data/vectoriser.pkl', 'rb') as file:
+        vectoriser = pickle.load(file)
+
+    # Vectorise data
+    train_data = vectoriser.transform(train_data['Title_Text'])
+    test_data = vectoriser.transform(test_data['Title_Text'])
+
+    # Map class labels to numerical values
+    class_mapping = {'Conservative': 0, 'Liberal': 1}
+    train_labels_mapped = train_labels['Political Lean'].map(class_mapping)
+    test_labels_mapped = test_labels['Political Lean'].map(class_mapping)
 
     # Train model
-    model = BernoulliNB()
-    model.fit(train_data, train_labels.values.ravel())
+    model = BernoulliNB().fit(train_data, train_labels_mapped.values.ravel())
 
     # Predict
     predicted = model.predict(test_data)
     print(predicted)
 
     # Evaluate
-    accuracy = accuracy_score(test_labels, predicted)
-    precision = precision_score(test_labels, predicted, average='binary')
-    recall = recall_score(test_labels, predicted)
-    f1 = f1_score(test_labels, predicted)
+    accuracy = accuracy_score(test_labels_mapped, predicted)
+    precision = precision_score(test_labels_mapped, predicted, average='binary')
+    recall = recall_score(test_labels_mapped, predicted)
+    f1 = f1_score(test_labels_mapped, predicted)
     print(f"Bernoulli Naive Bayes Classifier:")
     print(f"Accuracy: {accuracy}")
     print(f"Precision: {precision}")
