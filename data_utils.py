@@ -1,5 +1,6 @@
 import pandas as pd
 import pickle
+import numpy as np
 
 def load_data(file_path):
     data = pd.read_csv(file_path)
@@ -26,3 +27,4 @@ def data_mapping():
     train_labels_mapped = train_labels['Political Lean'].map(class_mapping)
     test_labels_mapped = test_labels['Political Lean'].map(class_mapping)
     return train_labels_mapped, test_labels_mapped, train_data, test_data
+    

@@ -32,23 +32,24 @@ def vectorise():
     print(f"Terms with the lowest idf:\n{terms[:10]}\n")
     print(f"Terms with the highest idf:\n{terms[-10:]}")
     print(vectoriser.get_feature_names_out())
+    return vectoriser
 
 
-def bayes():
-    multinomial()
-    bernoulli()
+def bayes(vectoriser):
+    multinomial(vectoriser)
+    bernoulli(vectoriser)
 
-def svm():
-    linear()
+def svm(vectoriser):
+    linear(vectoriser)
 
-def random_forest():
-    forest()
+def random_forest(vectoriser):
+    forest(vectoriser)
 
 
 if __name__ == "__main__":
-    preprocess_data()
+    #preprocess_data()
     split_dataset()
-    vectorise()
-    bayes()
-    svm()
-    random_forest()
+    vectoriser = vectorise()
+    bayes(vectoriser)
+    svm(vectoriser)
+    random_forest(vectoriser)
