@@ -1,2 +1,11 @@
 Top 10 words for classifying as 'liberal':
-Word: aadami, Importance: 7.142121599952971e-07
+Word: libertarian, Importance: 0.019009130605499015
+Word: government, Importance: 0.011052545839605918
+Word: social, Importance: 0.00961892495438058
+Word: capitalism, Importance: 0.009082335381829378
+Word: democratic, Importance: 0.008731760960978089
+Word: socialist, Importance: 0.007346117096412671
+Word: ancap, Importance: 0.007185170672118666
+Word: ukraine, Importance: 0.0053649945857106255
+Word: property, Importance: 0.005352266847135157
+Word: woman, Importance: 0.00520055239518984

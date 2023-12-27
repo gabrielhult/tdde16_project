@@ -51,23 +51,21 @@ def decisive_words(model, vectoriser, model_name):
     # Get feature importances from the trained model for both classes
     importances = model.feature_importances_
 
-    # Convert importances to 2-dimensional array
-    importances = importances.reshape(1, -1)
+    importances = importances.reshape(-len(vectoriser.get_feature_names_out()), len(vectoriser.get_feature_names_out()))
 
-    # Get the feature names (words)
     feature_names = np.array(vectoriser.get_feature_names_out())
 
-    # Assuming you want the top N words to display
     top_n_words = 10
 
     # Display top words for each class
-    for class_index in [0, 1]:
+    for class_index in range(importances.shape[0]): 
+        print("HELLO", class_index)
         # Sort the features based on the importances for the current class
-        sorted_indices_rf = np.argsort(importances[:, class_index])[::-1]
+        sorted_indices_rf = np.argsort(importances[class_index, :])[::-1]
 
         # Get the top N words and their corresponding importances for the current class
         top_words_with_importances_rf = list(zip(feature_names[sorted_indices_rf][:top_n_words],
-                                                importances[0, sorted_indices_rf][:top_n_words]))
+                                                importances[class_index, sorted_indices_rf][:top_n_words]))
 
         label_name = "liberal" if class_index == 0 else "conservative"
 

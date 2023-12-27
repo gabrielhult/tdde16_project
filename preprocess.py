@@ -7,11 +7,40 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import save_npz
 import pickle
 from data_utils import load_data as ld
+import re
+import contractions
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_lg")
+
+def sentiment_process_text(text):
+    # Expand contractions
+    text = ' '.join([contractions.fix(word) for word in text.split()])
+    
+    # Remove some punctuations (not ones that can be used in emoticons)
+    text = re.sub(r'[^\w\s\:\)\(\;\-\=\>\<\[\]\{\}\|\_\+\!\@\#\$\%\^\&\*]', '', text)
+    
+    # Lemmatize, remove stop words, and convert to lowercase
+    return ' '.join([token.lemma_.lower() for token in nlp(text) if not token.is_stop])
+
+def sentiment_pre_process(col_text):
+    processed_texts = []
+
+    # Use tqdm to create a progress bar
+    for text in tqdm(col_text, desc="Processing text for sentiment prediction", unit="text"):
+        processed_text = process_text(text)
+        processed_texts.append(processed_text)
+    
+    return processed_texts
 
 def process_text(text):
-    return ' '.join([token.lemma_ for token in nlp(text) if token.is_alpha and not token.is_stop])
+    # Expand contractions
+    text = ' '.join([contractions.fix(word) for word in text.split()])
+    
+    # Remove punctuations
+    text = re.sub(r'[^\w\s]', '', text)
+    
+    # Lemmatize, remove stop words, and convert to lowercase
+    return ' '.join([token.lemma_.lower() for token in nlp(text) if token.is_alpha and not token.is_stop])
 
 def pre_process(col_text):
     processed_texts = []

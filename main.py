@@ -1,15 +1,30 @@
 from data_utils import load_data as ld
-from preprocess import pre_process as pre, split_data as stt, vectorise_data as vec 
+from preprocess import pre_process as pre, split_data as stt, vectorise_data as vec, sentiment_pre_process as stp
 from models.bayes import multinomial, bernoulli
 from models.svm import linear
 from models.random_forest import forest
 import pandas as pd
 import os
+import vaderSentiment
 
-
-def preprocess_data():
+def prepare_data():
+    # TODO: Fix so the Title_Text column is correctly created
     data = ld('reddit_posts/reddit_posts.csv')
     data['Title_Text'] = data['Title'] + ' ' + data['Text']
+    data.to_csv('reddit_posts/reddit_posts_title_text.csv', index=False)
+
+def sentiment_prediction():
+    data = ld('reddit_posts/reddit_posts_title_text.csv')
+    data['Title_Text'] = stp(data['Title_Text'])
+    print(data.head())
+    vaderSentiment_model = vaderSentiment.SentimentIntensityAnalyzer()
+    for row in data.itertuples():
+        data["Sentiment"] = vaderSentiment_model.polarity_scores(row.Title_Text)
+        print("{:-<65} {}".format(row.Title_Text, str(data["Sentiment"])))
+    data.to_csv('reddit_posts/reddit_posts_sentiment.csv', index=False)
+
+def preprocess_data():
+    data = ld('reddit_posts/reddit_posts_title_text.csv')
     data['Title_Text'] = pre(data['Title_Text'])
     print(data.head())
     data.to_csv('reddit_posts/reddit_posts_cleaned.csv', index=False)
@@ -47,9 +62,11 @@ def random_forest(vectoriser):
 
 
 if __name__ == "__main__":
+    prepare_data()
+    sentiment_prediction()
     #preprocess_data()
-    split_dataset()
-    vectoriser = vectorise()
-    bayes(vectoriser)
-    svm(vectoriser)
-    random_forest(vectoriser)
+    #split_dataset()
+    #vectoriser = vectorise()
+    #bayes(vectoriser)
+    #svm(vectoriser)
+    #random_forest(vectoriser)
