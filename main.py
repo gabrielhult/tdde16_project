@@ -3,17 +3,33 @@ from preprocess import pre_process as pre, split_data as stt, vectorise_data as 
 from bayes import multinomial, bernoulli
 from svm import linear
 from random_forest import forest
+from dummy_baseline import dummy
 import pandas as pd
 import os
+from imblearn.under_sampling import RandomUnderSampler
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 from tqdm import tqdm
 
-def prepare_data():
+def prepare_data(undersample=False):
     data = ld('reddit_posts/reddit_posts.csv')
-    title_text_csv = pd.DataFrame(columns=['Title_Text', 'Political_Lean'])
-    for row in tqdm(data.itertuples(), total=len(data), desc="Processing data"):
-        title_text_csv.loc[len(title_text_csv)] = {'Title_Text': ' '.join([row.Title, row.Text]), 'Political_Lean': row.Political_Lean}
+
+    if undersample:
+        print("Undersampling...")
+        # Undersample the majority class
+        X = data.drop('Political Lean', axis=1)
+        y = data['Political Lean']
+        sampler = RandomUnderSampler(random_state=42)
+        X_resampled, y_resampled = sampler.fit_resample(X, y)
+
+        # Combine resampled features and labels
+        data_resampled = pd.concat([X_resampled, y_resampled], axis=1)
+    else:
+        data_resampled = data
+
+    title_text_csv = pd.DataFrame(columns=['Title_Text', 'Political Lean'])    
+    for _, row in tqdm(data_resampled.iterrows(), total=len(data_resampled), desc="Processing data"):
+        title_text_csv.loc[len(title_text_csv)] = {'Title_Text': ' '.join([row['Title'], row['Text']]), 'Political Lean': row['Political Lean']}
     title_text_csv.to_csv('reddit_posts/reddit_posts_title_text.csv', index=False)
 
 def sentiment_prediction():
@@ -50,23 +66,14 @@ def vectorise():
     return vectoriser
 
 
-def bayes(vectoriser):
+if __name__ == "__main__":
+    prepare_data(True)
+    #sentiment_prediction() # Only for sentiment prediction to further analysis
+    #preprocess_data()
+    #split_dataset()
+    vectoriser = vectorise()
+    dummy(vectoriser)
     multinomial(vectoriser)
     bernoulli(vectoriser)
-
-def svm(vectoriser):
     linear(vectoriser)
-
-def random_forest(vectoriser):
     forest(vectoriser)
-
-
-if __name__ == "__main__":
-    prepare_data()
-    #sentiment_prediction()
-    preprocess_data()
-    split_dataset()
-    vectoriser = vectorise()
-    bayes(vectoriser)
-    svm(vectoriser)
-    random_forest(vectoriser)
