@@ -36,7 +36,7 @@ def dummy(vectoriser):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Dummy Classifier')
-    plt.savefig('/home/gult/tdde16_project/graphs/dummy_confusion_matrix.png')
+    plt.savefig('/home/gult/tdde16_project/graphs/dummy_confusion_matrix.pdf')
 
     # Save model
     model_file_name = 'dummy_classifier.sav'
