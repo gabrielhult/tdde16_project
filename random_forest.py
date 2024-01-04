@@ -40,7 +40,7 @@ def forest(vectoriser):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Random Forest Classifier')
-    plt.savefig('/home/gult/tdde16_project/graphs/forest_confusion_matrix.png')
+    plt.savefig('/home/gult/tdde16_project/graphs/forest_confusion_matrix.pdf')
 
     # Save model
     model_file_name = 'random_forest.sav'

@@ -40,7 +40,7 @@ def multinomial(vectoriser):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Multinomial Naive Bayes Classifier')
-    plt.savefig('/home/gult/tdde16_project/graphs/multi_confusion_matrix.png')
+    plt.savefig('/home/gult/tdde16_project/graphs/multi_confusion_matrix.pdf')
 
     # Save model
     model_file_name = 'multinomial_bayes.sav'
@@ -78,7 +78,7 @@ def bernoulli(vectoriser):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Bernoulli Naive Bayes Classifier')
-    plt.savefig('/home/gult/tdde16_project/graphs/bernoulli_confusion_matrix.png')
+    plt.savefig('/home/gult/tdde16_project/graphs/bernoulli_confusion_matrix.pdf')
 
     # Save model
     model_file_name = 'bernoulli_bayes.sav'

@@ -40,7 +40,7 @@ def linear(vectoriser):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix - Linear SVM Classifier')
-    plt.savefig('/home/gult/tdde16_project/graphs/linear_confusion_matrix.png')
+    plt.savefig('/home/gult/tdde16_project/graphs/linear_confusion_matrix.pdf')
 
     # Save model
     model_file_name = 'linear_svm.sav'
