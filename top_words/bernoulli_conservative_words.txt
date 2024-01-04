@@ -1,3 +1,4 @@
+Top 10 words for classifying as 'conservative':
 Word: workers, Log Probability Difference: 3.0944671142396802
 Word: socdem, Log Probability Difference: 3.0636954555729266
 Word: mainly, Log Probability Difference: 2.7760133831211458

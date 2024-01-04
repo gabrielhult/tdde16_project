@@ -125,5 +125,6 @@ def decisive_words(model, vectoriser, model_name):
     # Save the top words with their log probability differences for conservative to a text file
     output_file_path = os.path.join('top_words', f"{model_name}_conservative_words.txt")
     with open(output_file_path, "w") as file:
+        file.write(f"Top {top_n_words} words for classifying as 'conservative':\n")
         for word, log_prob_diff_value in top_words_with_log_prob_diff_conservative:
             file.write(f"Word: {word}, Log Probability Difference: {log_prob_diff_value}\n")

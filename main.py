@@ -19,7 +19,7 @@ def prepare_data(undersample=False):
         # Undersample the majority class
         X = data.drop('Political Lean', axis=1)
         y = data['Political Lean']
-        sampler = RandomUnderSampler(random_state=42)
+        sampler = RandomUnderSampler(random_state=42, sampling_strategy='majority')
         X_resampled, y_resampled = sampler.fit_resample(X, y)
 
         # Combine resampled features and labels
@@ -67,7 +67,7 @@ def vectorise():
 
 
 if __name__ == "__main__":
-    prepare_data(True)
+    #prepare_data(False)
     #sentiment_prediction() # Only for sentiment prediction to further analysis
     #preprocess_data()
     #split_dataset()
