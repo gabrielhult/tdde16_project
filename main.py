@@ -33,14 +33,14 @@ def prepare_data(undersample=False):
     print("Values after data is prepared:", data_resampled['Political Lean'].value_counts())
 
 def sentiment_prediction():
-    data = ld('reddit_posts/reddit_posts_title_text.csv')
+    data = ld('reddit_posts/reddit_posts_processed.csv')
     data['Title_Text'] = stp(data['Title_Text'])
     data['Sentiment_VADER'] = data['Title_Text'].apply(lambda x: SentimentIntensityAnalyzer().polarity_scores(x)['compound'])
     data['Sentiment_TextBlob'] = data['Title_Text'].apply(lambda x: TextBlob(x).sentiment.polarity)
     data.to_csv('reddit_posts/reddit_posts_sentiment.csv', index=False)
 
 def preprocess_data():
-    data = ld('reddit_posts/reddit_posts_title_text.csv')
+    data = ld('reddit_posts/reddit_posts_processed.csv')
     data['Title_Text'] = pre(data['Title_Text'])
     print(data.head())
     data.to_csv('reddit_posts/reddit_posts_cleaned.csv', index=False)
@@ -72,8 +72,8 @@ if __name__ == "__main__":
     #preprocess_data()
     #split_dataset()
     vectoriser = vectorise()
-    dummy(vectoriser)
+    #dummy(vectoriser)
     multinomial(vectoriser)
     bernoulli(vectoriser)
-    linear(vectoriser)
-    forest(vectoriser)
+    #linear(vectoriser)
+    #forest(vectoriser)

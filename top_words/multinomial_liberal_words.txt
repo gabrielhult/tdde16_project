@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'liberal':
-Word: libertarian, Log Probability Difference: 1.7808609390636283
-Word: anarchocapitalist, Log Probability Difference: 1.6688508732112286
-Word: ancap, Log Probability Difference: 1.6557132505582182
-Word: libertarianism, Log Probability Difference: 1.6341131673381533
-Word: commie, Log Probability Difference: 1.4914319196970975
-Word: mask, Log Probability Difference: 1.3319101863404637
-Word: anarchocapitalism, Log Probability Difference: 1.3090897474556513
-Word: nap, Log Probability Difference: 1.2843425306285123
-Word: libertarians, Log Probability Difference: 1.2222172600588017
-Word: property, Log Probability Difference: 1.2199368820571923
+Word: trump
+Word: biden
+Word: ukraine
+Word: capitalism
+Word: russia
+Word: people
+Word: government
+Word: putin
+Word: say
+Word: desantis

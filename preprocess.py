@@ -9,6 +9,7 @@ import pickle
 from data_utils import load_data as ld
 import re
 import contractions
+import numpy as np
 
 nlp = spacy.load("en_core_web_lg")
 
@@ -88,6 +89,10 @@ def vectorise_data():
     test_data = pd.read_csv('data/x_test_data.csv')
     print(train_data.head())
     print(test_data.head())
+
+    # Replace NaN values with empty strings
+    train_data['Title_Text'] = train_data['Title_Text'].fillna('')
+    test_data['Title_Text'] = test_data['Title_Text'].fillna('')
 
     # Vectorise data
     vectoriser = TfidfVectorizer()

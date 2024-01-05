@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'conservative':
-Word: workers, Log Probability Difference: 3.0944671142396802
-Word: socdem, Log Probability Difference: 3.0636954555729266
-Word: mainly, Log Probability Difference: 2.7760133831211458
-Word: weekly, Log Probability Difference: 2.5936918263271913
-Word: dsa, Log Probability Difference: 2.5936918263271913
-Word: solidarity, Log Probability Difference: 2.4883313106693645
-Word: obama, Log Probability Difference: 2.431172896829416
-Word: trigger, Log Probability Difference: 2.431172896829416
-Word: women, Log Probability Difference: 2.370548275012981
-Word: soc, Log Probability Difference: 2.3705482750129807
+Word: people
+Word: like
+Word: know
+Word: new
+Word: think
+Word: right
+Word: trump
+Word: say
+Word: want
+Word: state

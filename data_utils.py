@@ -14,10 +14,14 @@ def data_mapping():
     test_title_text = pd.read_csv('data/x_test_data.csv')
     train_labels = pd.read_csv('data/y_train_data.csv')
     test_labels = pd.read_csv('data/y_test_data.csv')
+    data = pd.read_csv('reddit_posts/reddit_posts_processed.csv')
 
     # Load vectorizer
     with open('data/vectoriser.pkl', 'rb') as file:
         vectoriser = pickle.load(file)
+
+    train_title_text['Title_Text'] = train_title_text['Title_Text'].fillna('')
+    test_title_text['Title_Text'] = test_title_text['Title_Text'].fillna('')
 
     # Vectorise data
     train_title_text = vectoriser.transform(train_title_text['Title_Text'])
@@ -27,4 +31,4 @@ def data_mapping():
     #class_mapping = {'Conservative': 0, 'Liberal': 1}
     train_labels_mapped = train_labels['Political Lean']
     test_labels_mapped = test_labels['Political Lean']
-    return train_labels_mapped, test_labels_mapped, train_title_text, test_title_text
+    return train_labels_mapped, test_labels_mapped, train_title_text, test_title_text, data
