@@ -6,31 +6,31 @@ from random_forest import forest
 from dummy_baseline import dummy
 import pandas as pd
 import os
-from imblearn.under_sampling import RandomUnderSampler
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 from tqdm import tqdm
 
 def prepare_data(undersample=False):
     data = ld('reddit_posts/reddit_posts.csv')
+    print("Values before new df but data loaded:", data['Political Lean'].value_counts())
 
     if undersample:
         print("Undersampling...")
-        # Undersample the majority class
-        X = data.drop('Political Lean', axis=1)
-        y = data['Political Lean']
-        sampler = RandomUnderSampler(random_state=42, sampling_strategy='majority')
-        X_resampled, y_resampled = sampler.fit_resample(X, y)
-
-        # Combine resampled features and labels
-        data_resampled = pd.concat([X_resampled, y_resampled], axis=1)
+        lowest_amount_of_speeches_by_lean = data['Political Lean'].value_counts().min()
+        data_resampled = data.groupby('Political Lean').apply(lambda x: x.sample(n=lowest_amount_of_speeches_by_lean))
+        print("Values after undersampling:", data_resampled['Political Lean'].value_counts())
     else:
         data_resampled = data
 
     title_text_csv = pd.DataFrame(columns=['Title_Text', 'Political Lean'])    
     for _, row in tqdm(data_resampled.iterrows(), total=len(data_resampled), desc="Processing data"):
+        if pd.isnull(row['Text']):
+            row['Text'] = ''
         title_text_csv.loc[len(title_text_csv)] = {'Title_Text': ' '.join([row['Title'], row['Text']]), 'Political Lean': row['Political Lean']}
-    title_text_csv.to_csv('reddit_posts/reddit_posts_title_text.csv', index=False)
+    
+    # Save the processed data as a new CSV file
+    title_text_csv.to_csv('reddit_posts/reddit_posts_processed.csv', index=False)
+    print("Values after data is prepared:", data_resampled['Political Lean'].value_counts())
 
 def sentiment_prediction():
     data = ld('reddit_posts/reddit_posts_title_text.csv')
@@ -67,7 +67,7 @@ def vectorise():
 
 
 if __name__ == "__main__":
-    #prepare_data(False)
+    prepare_data(False)
     #sentiment_prediction() # Only for sentiment prediction to further analysis
     #preprocess_data()
     #split_dataset()
