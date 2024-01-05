@@ -24,7 +24,7 @@ def data_mapping():
     test_title_text = vectoriser.transform(test_title_text['Title_Text'])
 
     # Map class labels to numerical values
-    class_mapping = {'Conservative': 0, 'Liberal': 1}
-    train_labels_mapped = train_labels['Political Lean'].map(class_mapping)
-    test_labels_mapped = test_labels['Political Lean'].map(class_mapping)
+    #class_mapping = {'Conservative': 0, 'Liberal': 1}
+    train_labels_mapped = train_labels['Political Lean']
+    test_labels_mapped = test_labels['Political Lean']
     return train_labels_mapped, test_labels_mapped, train_title_text, test_title_text

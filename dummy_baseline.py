@@ -1,33 +1,29 @@
 import os
 import pickle
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 from data_utils import data_mapping as dm
 from sklearn.dummy import DummyClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
 
 def dummy(vectoriser):
     train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
 
+    leans = sorted(train_labels_mapped.unique())
+
     # Train model
-    model = DummyClassifier(strategy='most_frequent').fit(train_data, train_labels_mapped.values.ravel())
+    model = DummyClassifier(strategy='uniform').fit(train_data, train_labels_mapped)
 
     # Predict
     predicted = model.predict(test_data)
 
     # Evaluate
-    accuracy = accuracy_score(test_labels_mapped, predicted)
-    precision = precision_score(test_labels_mapped, predicted, average='binary')
-    recall = recall_score(test_labels_mapped, predicted)
-    f1 = f1_score(test_labels_mapped, predicted)
-    print(f"Dummy Classifier:")
-    print(f"Accuracy: {round(accuracy, 3)}")
-    print(f"Precision: {round(precision, 3)}")
-    print(f"Recall: {round(recall, 3)}")
-    print(f"F1: {round(f1, 3)}")
+    report = classification_report(test_labels_mapped, predicted, target_names=leans, zero_division=np.nan)
+    print(f"Dummy Classifier:\n", report)
 
     # Plot confusion matrix
     cm = confusion_matrix(test_labels_mapped, predicted)

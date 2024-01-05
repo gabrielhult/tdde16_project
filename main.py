@@ -67,7 +67,7 @@ def vectorise():
 
 
 if __name__ == "__main__":
-    prepare_data(False)
+    prepare_data(True)
     #sentiment_prediction() # Only for sentiment prediction to further analysis
     #preprocess_data()
     #split_dataset()

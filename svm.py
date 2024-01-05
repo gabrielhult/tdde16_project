@@ -7,14 +7,16 @@ import numpy as np
 import seaborn as sns
 from data_utils import data_mapping as dm
 from sklearn.svm import LinearSVC
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix
 
 
 def linear(vectoriser):
     train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
 
+    leans = sorted(train_labels_mapped.unique())
+
     # Train model
-    model = LinearSVC(dual=True).fit(train_data, train_labels_mapped.values.ravel())
+    model = LinearSVC(dual=True).fit(train_data, train_labels_mapped)
 
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
     decisive_words(model, vectoriser, 'linear')
@@ -23,15 +25,8 @@ def linear(vectoriser):
     predicted = model.predict(test_data)
 
     # Evaluate
-    accuracy = accuracy_score(test_labels_mapped, predicted)
-    precision = precision_score(test_labels_mapped, predicted, average='binary')
-    recall = recall_score(test_labels_mapped, predicted)
-    f1 = f1_score(test_labels_mapped, predicted)
-    print(f"Linear SVM Classifier:")
-    print(f"Accuracy: {round(accuracy, 3)}")
-    print(f"Precision: {round(precision, 3)}")
-    print(f"Recall: {round(recall, 3)}")
-    print(f"F1: {round(f1, 3)}")
+    report = classification_report(test_labels_mapped, predicted, target_names=leans, zero_division=np.nan)
+    print(f"Linear SVM Classifier:\n", report)
 
     # Plot confusion matrix
     cm = confusion_matrix(test_labels_mapped, predicted)

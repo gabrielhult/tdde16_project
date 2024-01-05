@@ -7,14 +7,15 @@ import numpy as np
 import seaborn as sns
 from data_utils import data_mapping as dm
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
 
 def multinomial(vectoriser):
     train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
 
+    leans = sorted(train_labels_mapped.unique())
     # Train model
-    model = MultinomialNB().fit(train_data, train_labels_mapped.values.ravel())
+    model = MultinomialNB().fit(train_data, train_labels_mapped)
 
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
     decisive_words(model, vectoriser, 'multinomial')
@@ -23,15 +24,8 @@ def multinomial(vectoriser):
     predicted = model.predict(test_data)
 
     # Evaluate
-    accuracy = accuracy_score(test_labels_mapped, predicted)
-    precision = precision_score(test_labels_mapped, predicted, average='binary')
-    recall = recall_score(test_labels_mapped, predicted)
-    f1 = f1_score(test_labels_mapped, predicted)
-    print(f"Multinomial Naive Bayes Classifier:")
-    print(f"Accuracy: {round(accuracy, 3)}")
-    print(f"Precision: {round(precision, 3)}")
-    print(f"Recall: {round(recall, 3)}")
-    print(f"F1: {round(f1, 3)}")
+    report = classification_report(test_labels_mapped, predicted, target_names=leans, zero_division=np.nan)
+    print(f"Multinomial Naive Bayes Classifier:\n", report)
 
     # Plot confusion matrix
     cm = confusion_matrix(test_labels_mapped, predicted)
@@ -51,8 +45,10 @@ def multinomial(vectoriser):
 def bernoulli(vectoriser):
     train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
 
+    leans = sorted(train_labels_mapped.unique())
+
     # Train model
-    model = BernoulliNB().fit(train_data, train_labels_mapped.values.ravel())
+    model = BernoulliNB().fit(train_data, train_labels_mapped)
 
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
     decisive_words(model, vectoriser, 'bernoulli')
@@ -61,15 +57,9 @@ def bernoulli(vectoriser):
     predicted = model.predict(test_data)
 
     # Evaluate
-    accuracy = accuracy_score(test_labels_mapped, predicted)
-    precision = precision_score(test_labels_mapped, predicted, average='binary')
-    recall = recall_score(test_labels_mapped, predicted)
-    f1 = f1_score(test_labels_mapped, predicted)
-    print(f"Bernoulli Naive Bayes Classifier:")
-    print(f"Accuracy: {round(accuracy, 3)}")
-    print(f"Precision: {round(precision, 3)}")
-    print(f"Recall: {round(recall, 3)}")
-    print(f"F1: {round(f1, 3)}")
+    report = classification_report(test_labels_mapped, predicted, target_names=leans, zero_division=np.nan)
+    print(f"Bernoulli Naive Bayes Classifier:\n", report)
+
 
     # Plot confusion matrix
     cm = confusion_matrix(test_labels_mapped, predicted)
