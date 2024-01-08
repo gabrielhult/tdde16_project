@@ -18,7 +18,7 @@ def linear(vectoriser):
     leans = sorted(train_labels_mapped.unique())
 
     # Train model
-    model = LinearSVC(dual=True).fit(train_data, train_labels_mapped)
+    model = LinearSVC().fit(train_data, train_labels_mapped)
 
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
     liberal_top_words, conservative_top_words = decisive_words(model, vectoriser, 'linear')

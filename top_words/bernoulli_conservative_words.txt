@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'conservative':
 Word: people
 Word: like
-Word: know
+Word: trump
 Word: new
 Word: think
 Word: right
-Word: trump
-Word: say
 Word: want
-Word: state
+Word: know
+Word: say
+Word: work

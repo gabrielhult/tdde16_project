@@ -59,10 +59,10 @@ def vectorise():
 
 if __name__ == "__main__":
     prepare_data(True)
-    #preprocess_data()
-    #split_dataset()
+    preprocess_data()
+    split_dataset()
     vectoriser = vectorise()
-    #dummy(vectoriser)
+    dummy(vectoriser)
     #multinomial(vectoriser)
     #bernoulli(vectoriser)
     linear(vectoriser)

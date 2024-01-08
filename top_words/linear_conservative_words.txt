@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'conservative':
-Word: ally
+Word: solidarity
+Word: opinion
+Word: development
+Word: enemy
 Word: dsa
-Word: georgia
-Word: feminist
-Word: statement
-Word: cuba
 Word: coup
-Word: progressive
-Word: flourish
-Word: workers
+Word: woman
+Word: struggle
+Word: feminist
+Word: cuba

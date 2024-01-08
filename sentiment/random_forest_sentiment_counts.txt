@@ -1,3 +1,3 @@
-Negative Sentiment Count: 1250
-Neutral Sentiment Count: 701
-Positive Sentiment Count: 1246
+Negative Sentiment Count: 1227
+Neutral Sentiment Count: 671
+Positive Sentiment Count: 1224

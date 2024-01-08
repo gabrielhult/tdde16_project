@@ -3,9 +3,9 @@ Word: trump
 Word: biden
 Word: ukraine
 Word: capitalism
-Word: russia
 Word: people
-Word: government
+Word: russia
 Word: putin
+Word: government
 Word: say
-Word: desantis
+Word: think
