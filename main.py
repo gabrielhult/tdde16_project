@@ -6,8 +6,6 @@ from random_forest import forest
 from dummy_baseline import dummy
 import pandas as pd
 import os
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from textblob import TextBlob
 from tqdm import tqdm
 
 def prepare_data(undersample=False):
@@ -31,13 +29,6 @@ def prepare_data(undersample=False):
     # Save the processed data as a new CSV file
     title_text_csv.to_csv('reddit_posts/reddit_posts_processed.csv', index=False)
     print("Values after data is prepared:", data_resampled['Political Lean'].value_counts())
-
-def sentiment_prediction():
-    data = ld('reddit_posts/reddit_posts_processed.csv')
-    data['Title_Text'] = stp(data['Title_Text'])
-    data['Sentiment_VADER'] = data['Title_Text'].apply(lambda x: SentimentIntensityAnalyzer().polarity_scores(x)['compound'])
-    data['Sentiment_TextBlob'] = data['Title_Text'].apply(lambda x: TextBlob(x).sentiment.polarity)
-    data.to_csv('reddit_posts/reddit_posts_sentiment.csv', index=False)
 
 def preprocess_data():
     data = ld('reddit_posts/reddit_posts_processed.csv')
@@ -68,12 +59,11 @@ def vectorise():
 
 if __name__ == "__main__":
     prepare_data(True)
-    #sentiment_prediction() # Only for sentiment prediction to further analysis
     #preprocess_data()
     #split_dataset()
     vectoriser = vectorise()
     #dummy(vectoriser)
-    multinomial(vectoriser)
-    bernoulli(vectoriser)
-    #linear(vectoriser)
-    #forest(vectoriser)
+    #multinomial(vectoriser)
+    #bernoulli(vectoriser)
+    linear(vectoriser)
+    forest(vectoriser)

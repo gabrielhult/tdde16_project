@@ -1,0 +1,4 @@
+Average Sentiment for Liberal Sentences (TextBlob): 0.051983294539654216
+Average Sentiment for Liberal Sentences (VADER): 0.0390837568771286
+Average Sentiment for Conservative Sentences (TextBlob): 0.07239499637303283
+Average Sentiment for Conservative Sentences (VADER): 0.06862224344978177

@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'liberal':
-Word: ally, Coefficient: 1.959735577442587
-Word: dsa, Coefficient: 1.8584801469812395
-Word: georgia, Coefficient: 1.69955565244474
-Word: feminist, Coefficient: 1.6753910979624365
-Word: statement, Coefficient: 1.6640926046449078
-Word: cuba, Coefficient: 1.6337701101934476
-Word: coup, Coefficient: 1.599989701448361
-Word: progressive, Coefficient: 1.5565044417333636
-Word: flourish, Coefficient: 1.5170143047221627
-Word: workers, Coefficient: 1.5045734914024063
+Word: ally
+Word: dsa
+Word: georgia
+Word: feminist
+Word: statement
+Word: cuba
+Word: coup
+Word: progressive
+Word: flourish
+Word: workers

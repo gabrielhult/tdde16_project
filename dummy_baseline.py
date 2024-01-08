@@ -7,11 +7,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from data_utils import data_mapping as dm
 from sklearn.dummy import DummyClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report
 
 
 def dummy(vectoriser):
-    train_labels_mapped, test_labels_mapped, train_data, test_data = dm()
+    train_labels_mapped, test_labels_mapped, train_data, test_data, data = dm()
 
     leans = sorted(train_labels_mapped.unique())
 

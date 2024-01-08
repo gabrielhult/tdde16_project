@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'liberal':
-Word: ukraine, Importance: 0.009278104094431291
-Word: trump, Importance: 0.008151103377855176
-Word: capitalism, Importance: 0.0078098180371144734
-Word: russia, Importance: 0.0073774333730669064
-Word: libertarian, Importance: 0.007292772166805349
-Word: putin, Importance: 0.006225679373634969
-Word: biden, Importance: 0.006222295797073227
-Word: desantis, Importance: 0.0054839335592343575
-Word: woman, Importance: 0.00529557104796423
-Word: government, Importance: 0.004786306678785778
+Word: ukraine
+Word: trump
+Word: russia
+Word: capitalism
+Word: putin
+Word: desantis
+Word: biden
+Word: libertarian
+Word: woman
+Word: government

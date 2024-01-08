@@ -23,46 +23,8 @@ def multinomial(vectoriser):
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
     liberal_top_words, conservative_top_words = decisive_words(model, vectoriser, 'multinomial')
 
-    # Identify rows with top words for each class
-    liberal_rows = data[data['Title_Text'].str.contains('|'.join(liberal_top_words), case=False)]
-    conservative_rows = data[data['Title_Text'].str.contains('|'.join(conservative_top_words), case=False)]
-
-    # Extract sentences with top words
-    liberal_sentences = liberal_rows['Title_Text'].tolist()
-    conservative_sentences = conservative_rows['Title_Text'].tolist()
-
-    # Perform sentiment analysis using TextBlob
-    def get_sentiment_textblob(sentence):
-        analysis = TextBlob(sentence)
-        return analysis.sentiment.polarity
+    sentiment_prediction(data, liberal_top_words, conservative_top_words, 'multinomial')
     
-    # Perform sentiment analysis using VADER
-    def get_sentiment_vader(sentence):
-        analyzer = SentimentIntensityAnalyzer()
-        sentiment_scores = analyzer.polarity_scores(sentence)
-        return sentiment_scores['compound']
-
-    # Analyze sentiment for liberal sentences
-    liberal_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in liberal_sentences]
-    liberal_sentiments_vader = [get_sentiment_vader(sentence) for sentence in liberal_sentences]
-
-
-    # Analyze sentiment for conservative sentences
-    conservative_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in conservative_sentences]
-    conservative_sentiments_vader = [get_sentiment_vader(sentence) for sentence in conservative_sentences]
-
-    # Calculate average sentiment
-    average_liberal_sentiment_blob = sum(liberal_sentiments_blob) / len(liberal_sentiments_blob)
-    average_liberal_sentiment_vader = sum(liberal_sentiments_vader) / len(liberal_sentiments_vader)
-    average_conservative_sentiment_blob = sum(conservative_sentiments_blob) / len(conservative_sentiments_blob)
-    average_conservative_sentiment_vader = sum(conservative_sentiments_vader) / len(conservative_sentiments_vader)
-
-    # Print average sentiment
-    print("Average Sentiment for Liberal Sentences (TextBlob):", average_liberal_sentiment_blob)
-    print("Average Sentiment for Liberal Sentences (VADER):", average_liberal_sentiment_vader)
-    print("Average Sentiment for Conservative Sentences (TextBlob):", average_conservative_sentiment_blob)
-    print("Average Sentiment for Conservative Sentences (VADER):", average_conservative_sentiment_vader)
-
     # Predict
     predicted = model.predict(test_data)
 
@@ -96,44 +58,7 @@ def bernoulli(vectoriser):
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
     liberal_top_words, conservative_top_words = decisive_words(model, vectoriser, 'bernoulli')
 
-    # Identify rows with top words for each class
-    liberal_rows = data[data['Title_Text'].str.contains('|'.join(liberal_top_words), case=False)]
-    conservative_rows = data[data['Title_Text'].str.contains('|'.join(conservative_top_words), case=False)]
-
-    # Extract sentences with top words
-    liberal_sentences = liberal_rows['Title_Text'].tolist()
-    conservative_sentences = conservative_rows['Title_Text'].tolist()
-
-    # Perform sentiment analysis using TextBlob
-    def get_sentiment_textblob(sentence):
-        analysis = TextBlob(sentence)
-        return analysis.sentiment.polarity
-    
-    # Perform sentiment analysis using VADER
-    def get_sentiment_vader(sentence):
-        analyzer = SentimentIntensityAnalyzer()
-        sentiment_scores = analyzer.polarity_scores(sentence)
-        return sentiment_scores['compound']
-
-    # Analyze sentiment for liberal sentences
-    liberal_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in liberal_sentences]
-    liberal_sentiments_vader = [get_sentiment_vader(sentence) for sentence in liberal_sentences]
-
-    # Analyze sentiment for conservative sentences
-    conservative_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in conservative_sentences]
-    conservative_sentiments_vader = [get_sentiment_vader(sentence) for sentence in conservative_sentences]
-
-    # Calculate average sentiment
-    average_liberal_sentiment_blob = sum(liberal_sentiments_blob) / len(liberal_sentiments_blob)
-    average_liberal_sentiment_vader = sum(liberal_sentiments_vader) / len(liberal_sentiments_vader)
-    average_conservative_sentiment_blob = sum(conservative_sentiments_blob) / len(conservative_sentiments_blob)
-    average_conservative_sentiment_vader = sum(conservative_sentiments_vader) / len(conservative_sentiments_vader)
-
-    # Print average sentiment
-    print("Average Sentiment for Liberal Sentences (TextBlob):", average_liberal_sentiment_blob)
-    print("Average Sentiment for Liberal Sentences (VADER):", average_liberal_sentiment_vader)
-    print("Average Sentiment for Conservative Sentences (TextBlob):", average_conservative_sentiment_blob)
-    print("Average Sentiment for Conservative Sentences (VADER):", average_conservative_sentiment_vader)
+    sentiment_prediction(data, liberal_top_words, conservative_top_words, 'bernoulli')
 
     # Predict
     predicted = model.predict(test_data)
@@ -165,7 +90,6 @@ def decisive_words(model, vectoriser, model_name):
     liberal_top_words = [vectoriser.get_feature_names_out()[i] for i in feature_log_probs[0].argsort()[-10:][::-1]]
     conservative_top_words = [vectoriser.get_feature_names_out()[i] for i in feature_log_probs[1].argsort()[-10:][::-1]]
 
-
     # Print or visualize the top words for each class
     print("Top words for Liberal:", liberal_top_words)
     print("Top words for Conservative:", conservative_top_words)
@@ -186,3 +110,87 @@ def decisive_words(model, vectoriser, model_name):
             file.write(f"Word: {word}\n")
 
     return liberal_top_words, conservative_top_words
+
+
+def sentiment_prediction(data, liberal_top_words, conservative_top_words, model_name):
+    # Identify rows with top words for each class
+    liberal_rows = data[data['Title_Text'].str.contains('|'.join(liberal_top_words), case=False)]
+    conservative_rows = data[data['Title_Text'].str.contains('|'.join(conservative_top_words), case=False)]
+
+    # Extract sentences with top words
+    liberal_sentences = liberal_rows['Title_Text'].tolist()
+    conservative_sentences = conservative_rows['Title_Text'].tolist()
+
+    # Perform sentiment analysis using TextBlob
+    def get_sentiment_textblob(sentence):
+        analysis = TextBlob(sentence)
+        return analysis.sentiment.polarity
+    
+    # Perform sentiment analysis using VADER
+    def get_sentiment_vader(sentence):
+        analyzer = SentimentIntensityAnalyzer()
+        sentiment_scores = analyzer.polarity_scores(sentence)
+        return sentiment_scores['compound']
+
+    # Analyze sentiment for liberal sentences
+    liberal_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in liberal_sentences]
+    liberal_sentiments_vader = [get_sentiment_vader(sentence) for sentence in liberal_sentences]
+
+
+    # Analyze sentiment for conservative sentences
+    conservative_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in conservative_sentences]
+    conservative_sentiments_vader = [get_sentiment_vader(sentence) for sentence in conservative_sentences]
+
+    # Calculate average sentiment
+    average_liberal_sentiment_blob = sum(liberal_sentiments_blob) / len(liberal_sentiments_blob)
+    average_liberal_sentiment_vader = sum(liberal_sentiments_vader) / len(liberal_sentiments_vader)
+    average_conservative_sentiment_blob = sum(conservative_sentiments_blob) / len(conservative_sentiments_blob)
+    average_conservative_sentiment_vader = sum(conservative_sentiments_vader) / len(conservative_sentiments_vader)
+
+    # Calculate maximum and minimum sentiment scores
+    max_liberal_sentiment_blob = max(liberal_sentiments_blob)
+    min_liberal_sentiment_blob = min(liberal_sentiments_blob)
+    max_liberal_sentiment_vader = max(liberal_sentiments_vader)
+    min_liberal_sentiment_vader = min(liberal_sentiments_vader)
+    max_conservative_sentiment_blob = max(conservative_sentiments_blob)
+    min_conservative_sentiment_blob = min(conservative_sentiments_blob)
+    max_conservative_sentiment_vader = max(conservative_sentiments_vader)
+    min_conservative_sentiment_vader = min(conservative_sentiments_vader)
+
+
+    # Initialize counters
+    sentiment_counts = {'Negative': 0, 'Neutral': 0, 'Positive': 0}
+
+    # Iterate over liberal sentiments
+    sentiments = liberal_sentiments_vader + conservative_sentiments_vader
+    sentiment_labels = ['Negative' if sentiment < 0 else 'Neutral' if sentiment == 0 else 'Positive' for sentiment in sentiments]
+
+    # Count the sentiments
+    for label in sentiment_labels:
+        sentiment_counts[label] += 1
+
+    # Output sentiment counts to file
+    output_file_path = os.path.join('sentiment', f"{model_name}_sentiment_counts.txt")
+    with open(output_file_path, "w") as file:
+        for label, count in sentiment_counts.items():
+            file.write(f"{label} Sentiment Count: {count}\n")
+
+    # Output average sentiment to file
+    output_file_path = os.path.join('sentiment', f"{model_name}__average_sentiment.txt")
+    with open(output_file_path, "w") as file:
+        file.write("Average Sentiment for Liberal Sentences (TextBlob): " + str(average_liberal_sentiment_blob) + "\n")
+        file.write("Average Sentiment for Liberal Sentences (VADER): " + str(average_liberal_sentiment_vader) + "\n")
+        file.write("Average Sentiment for Conservative Sentences (TextBlob): " + str(average_conservative_sentiment_blob) + "\n")
+        file.write("Average Sentiment for Conservative Sentences (VADER): " + str(average_conservative_sentiment_vader) + "\n")
+
+    # Output maximum and minimum sentiment scores to file
+    output_file_path = os.path.join('sentiment', f"{model_name}_sentiment_scores.txt")
+    with open(output_file_path, "w") as file:
+        file.write("Maximum Sentiment for Liberal Sentences (TextBlob): " + str(max_liberal_sentiment_blob) + "\n")
+        file.write("Minimum Sentiment for Liberal Sentences (TextBlob): " + str(min_liberal_sentiment_blob) + "\n")
+        file.write("Maximum Sentiment for Liberal Sentences (VADER): " + str(max_liberal_sentiment_vader) + "\n")
+        file.write("Minimum Sentiment for Liberal Sentences (VADER): " + str(min_liberal_sentiment_vader) + "\n")
+        file.write("Maximum Sentiment for Conservative Sentences (TextBlob): " + str(max_conservative_sentiment_blob) + "\n")
+        file.write("Minimum Sentiment for Conservative Sentences (TextBlob): " + str(min_conservative_sentiment_blob) + "\n")
+        file.write("Maximum Sentiment for Conservative Sentences (VADER): " + str(max_conservative_sentiment_vader) + "\n")
+        file.write("Minimum Sentiment for Conservative Sentences (VADER): " + str(min_conservative_sentiment_vader) + "\n")
