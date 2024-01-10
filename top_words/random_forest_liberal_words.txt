@@ -1,11 +1,11 @@
 Top 10 words for classifying as 'liberal':
 Word: ukraine
+Word: trump
 Word: capitalism
 Word: libertarian
-Word: trump
 Word: biden
-Word: russia
 Word: desantis
-Word: putin
 Word: woman
+Word: putin
+Word: russia
 Word: government

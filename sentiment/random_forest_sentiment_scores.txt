@@ -1,8 +1,8 @@
 Maximum Sentiment for Liberal Sentences (TextBlob): 1.0
 Minimum Sentiment for Liberal Sentences (TextBlob): -1.0
 Maximum Sentiment for Liberal Sentences (VADER): 0.9999
-Minimum Sentiment for Liberal Sentences (VADER): -0.9996
-Maximum Sentiment for Conservative Sentences (TextBlob): 0.45
-Minimum Sentiment for Conservative Sentences (TextBlob): 0.031822691197691204
+Minimum Sentiment for Liberal Sentences (VADER): -0.9998
+Maximum Sentiment for Conservative Sentences (TextBlob): 0.8
+Minimum Sentiment for Conservative Sentences (TextBlob): -0.4
 Maximum Sentiment for Conservative Sentences (VADER): 0.9995
-Minimum Sentiment for Conservative Sentences (VADER): -0.9984
+Minimum Sentiment for Conservative Sentences (VADER): -0.9987

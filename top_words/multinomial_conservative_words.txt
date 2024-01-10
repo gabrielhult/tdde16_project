@@ -1,11 +1,91 @@
 Top 10 words for classifying as 'conservative':
-Word: trump
-Word: people
-Word: new
-Word: social
-Word: party
-Word: worker
-Word: like
-Word: say
-Word: think
-Word: want
+Word: trump 
+Sentiment scores (VADER): 
+	Positive=28.93%, 
+	Neutral=29.84%, 
+	Negative=41.23%
+Sentiment scores (TextBlob): 
+	Positive=34.85%, 
+	Neutral=46.81%, 
+	Negative=18.34%
+Word: people 
+Sentiment scores (VADER): 
+	Positive=53.54%, 
+	Neutral=7.67%, 
+	Negative=38.80%
+Sentiment scores (TextBlob): 
+	Positive=66.04%, 
+	Neutral=12.26%, 
+	Negative=21.70%
+Word: new 
+Sentiment scores (VADER): 
+	Positive=45.91%, 
+	Neutral=17.71%, 
+	Negative=36.38%
+Sentiment scores (TextBlob): 
+	Positive=74.93%, 
+	Neutral=9.81%, 
+	Negative=15.26%
+Word: like 
+Sentiment scores (VADER): 
+	Positive=70.03%, 
+	Neutral=1.19%, 
+	Negative=28.78%
+Sentiment scores (TextBlob): 
+	Positive=72.15%, 
+	Neutral=9.15%, 
+	Negative=18.70%
+Word: woman 
+Sentiment scores (VADER): 
+	Positive=34.44%, 
+	Neutral=10.00%, 
+	Negative=55.56%
+Sentiment scores (TextBlob): 
+	Positive=45.56%, 
+	Neutral=18.89%, 
+	Negative=35.56%
+Word: party 
+Sentiment scores (VADER): 
+	Positive=74.24%, 
+	Neutral=1.75%, 
+	Negative=24.02%
+Sentiment scores (TextBlob): 
+	Positive=64.63%, 
+	Neutral=20.96%, 
+	Negative=14.41%
+Word: biden 
+Sentiment scores (VADER): 
+	Positive=31.90%, 
+	Neutral=24.69%, 
+	Negative=43.40%
+Sentiment scores (TextBlob): 
+	Positive=31.44%, 
+	Neutral=45.71%, 
+	Negative=22.85%
+Word: social 
+Sentiment scores (VADER): 
+	Positive=61.98%, 
+	Neutral=13.37%, 
+	Negative=24.65%
+Sentiment scores (TextBlob): 
+	Positive=71.59%, 
+	Neutral=13.23%, 
+	Negative=15.18%
+Word: worker 
+Sentiment scores (VADER): 
+	Positive=52.69%, 
+	Neutral=13.47%, 
+	Negative=33.83%
+Sentiment scores (TextBlob): 
+	Positive=58.08%, 
+	Neutral=26.35%, 
+	Negative=15.57%
+Word: say 
+Sentiment scores (VADER): 
+	Positive=45.68%, 
+	Neutral=15.86%, 
+	Negative=38.46%
+Sentiment scores (TextBlob): 
+	Positive=57.30%, 
+	Neutral=25.27%, 
+	Negative=17.43%

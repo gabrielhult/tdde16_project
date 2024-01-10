@@ -21,9 +21,7 @@ def multinomial(vectoriser):
     model = MultinomialNB().fit(train_data, train_labels_mapped)
 
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
-    liberal_top_words, conservative_top_words = decisive_words(model, vectoriser, 'multinomial')
-
-    sentiment_prediction(data, liberal_top_words, conservative_top_words, 'multinomial')
+    decisive_words(data, model, vectoriser, 'multinomial')
     
     # Predict
     predicted = model.predict(test_data)
@@ -56,9 +54,7 @@ def bernoulli(vectoriser):
     model = BernoulliNB().fit(train_data, train_labels_mapped)
 
     # Print out the most decisive words for classifying as either "Liberal" or "Conservative"
-    liberal_top_words, conservative_top_words = decisive_words(model, vectoriser, 'bernoulli')
-
-    sentiment_prediction(data, liberal_top_words, conservative_top_words, 'bernoulli')
+    decisive_words(data, model, vectoriser, 'bernoulli')
 
     # Predict
     predicted = model.predict(test_data)
@@ -82,7 +78,7 @@ def bernoulli(vectoriser):
     with open(os.path.join('models', model_file_name), 'wb') as file:
         pickle.dump(model, file)
 
-def decisive_words(model, vectoriser, model_name):
+def decisive_words(data, model, vectoriser, model_name):
     # Get feature log probabilities
     feature_log_probs = model.feature_log_prob_
 
@@ -94,103 +90,59 @@ def decisive_words(model, vectoriser, model_name):
     print("Top words for Liberal:", liberal_top_words)
     print("Top words for Conservative:", conservative_top_words)
 
-
-    # # Save the top words with their log probability differences for liberal to a text file
+    # Save the top words with their log probability differences for liberal to a text file
     output_file_path = os.path.join('top_words', f"{model_name}_liberal_words.txt")
     with open(output_file_path, "w") as file:
         file.write(f"Top 10 words for classifying as 'liberal':\n")
         for word in liberal_top_words:
-            file.write(f"Word: {word}\n")
+            file.write(f"Word: {word} \n")
+            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage = sentiment_prediction(data, word)
+            file.write(f"Sentiment scores (VADER): \n\tPositive={vader_positive_percentage:.2f}%, \n\tNeutral={vader_neutral_percentage:.2f}%, \n\tNegative={vader_negative_percentage:.2f}%\n")
+            file.write(f"Sentiment scores (TextBlob): \n\tPositive={blob_positive_percentage:.2f}%, \n\tNeutral={blob_neutral_percentage:.2f}%, \n\tNegative={blob_negative_percentage:.2f}%\n")
 
     # Save the top words with their log probability differences for conservative to a text file
     output_file_path = os.path.join('top_words', f"{model_name}_conservative_words.txt")
     with open(output_file_path, "w") as file:
         file.write(f"Top 10 words for classifying as 'conservative':\n")
         for word in conservative_top_words:
-            file.write(f"Word: {word}\n")
+            file.write(f"Word: {word} \n")
+            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage = sentiment_prediction(data, word)
+            file.write(f"Sentiment scores (VADER): \n\tPositive={vader_positive_percentage:.2f}%, \n\tNeutral={vader_neutral_percentage:.2f}%, \n\tNegative={vader_negative_percentage:.2f}%\n")
+            file.write(f"Sentiment scores (TextBlob): \n\tPositive={blob_positive_percentage:.2f}%, \n\tNeutral={blob_neutral_percentage:.2f}%, \n\tNegative={blob_negative_percentage:.2f}%\n")
 
     return liberal_top_words, conservative_top_words
 
 
-def sentiment_prediction(data, liberal_top_words, conservative_top_words, model_name):
-    # Identify rows with top words for each class
-    liberal_rows = data[data['Title_Text'].str.contains('|'.join(liberal_top_words), case=False)]
-    conservative_rows = data[data['Title_Text'].str.contains('|'.join(conservative_top_words), case=False)]
+def sentiment_prediction(data, word):
+    # Identify rows with the specific word
+    rows_with_word = data[data['Title_Text'].str.contains(word, case=False)]
 
-    # Extract sentences with top words
-    liberal_sentences = liberal_rows['Title_Text'].tolist()
-    conservative_sentences = conservative_rows['Title_Text'].tolist()
+    # Extract sentences with the specific word
+    sentences = rows_with_word['Title_Text'].tolist()
 
     # Perform sentiment analysis using TextBlob
     def get_sentiment_textblob(sentence):
         analysis = TextBlob(sentence)
         return analysis.sentiment.polarity
-    
+
     # Perform sentiment analysis using VADER
     def get_sentiment_vader(sentence):
         analyzer = SentimentIntensityAnalyzer()
         sentiment_scores = analyzer.polarity_scores(sentence)
         return sentiment_scores['compound']
 
-    # Analyze sentiment for liberal sentences
-    liberal_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in liberal_sentences]
-    liberal_sentiments_vader = [get_sentiment_vader(sentence) for sentence in liberal_sentences]
+    # Analyze sentiment for the sentences
+    sentiments_blob = [get_sentiment_textblob(sentence) for sentence in sentences]
+    sentiments_vader = [get_sentiment_vader(sentence) for sentence in sentences]
 
+    # Calculate the percentage of positive, neutral, and negative sentiments for VADER
+    vader_positive_percentage = sum(sentiment > 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
+    vader_neutral_percentage = sum(sentiment == 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
+    vader_negative_percentage = sum(sentiment < 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
 
-    # Analyze sentiment for conservative sentences
-    conservative_sentiments_blob = [get_sentiment_textblob(sentence) for sentence in conservative_sentences]
-    conservative_sentiments_vader = [get_sentiment_vader(sentence) for sentence in conservative_sentences]
+    # Calculate the percentage of positive, neutral, and negative sentiments for TextBlob
+    blob_positive_percentage = sum(sentiment > 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
+    blob_neutral_percentage = sum(sentiment == 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
+    blob_negative_percentage = sum(sentiment < 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
 
-    # Calculate average sentiment
-    average_liberal_sentiment_blob = sum(liberal_sentiments_blob) / len(liberal_sentiments_blob)
-    average_liberal_sentiment_vader = sum(liberal_sentiments_vader) / len(liberal_sentiments_vader)
-    average_conservative_sentiment_blob = sum(conservative_sentiments_blob) / len(conservative_sentiments_blob)
-    average_conservative_sentiment_vader = sum(conservative_sentiments_vader) / len(conservative_sentiments_vader)
-
-    # Calculate maximum and minimum sentiment scores
-    max_liberal_sentiment_blob = max(liberal_sentiments_blob)
-    min_liberal_sentiment_blob = min(liberal_sentiments_blob)
-    max_liberal_sentiment_vader = max(liberal_sentiments_vader)
-    min_liberal_sentiment_vader = min(liberal_sentiments_vader)
-    max_conservative_sentiment_blob = max(conservative_sentiments_blob)
-    min_conservative_sentiment_blob = min(conservative_sentiments_blob)
-    max_conservative_sentiment_vader = max(conservative_sentiments_vader)
-    min_conservative_sentiment_vader = min(conservative_sentiments_vader)
-
-
-    # Initialize counters
-    sentiment_counts = {'Negative': 0, 'Neutral': 0, 'Positive': 0}
-
-    # Iterate over liberal sentiments
-    sentiments = liberal_sentiments_vader + conservative_sentiments_vader
-    sentiment_labels = ['Negative' if sentiment < 0 else 'Neutral' if sentiment == 0 else 'Positive' for sentiment in sentiments]
-
-    # Count the sentiments
-    for label in sentiment_labels:
-        sentiment_counts[label] += 1
-
-    # Output sentiment counts to file
-    output_file_path = os.path.join('sentiment', f"{model_name}_sentiment_counts.txt")
-    with open(output_file_path, "w") as file:
-        for label, count in sentiment_counts.items():
-            file.write(f"{label} Sentiment Count: {count}\n")
-
-    # Output average sentiment to file
-    output_file_path = os.path.join('sentiment', f"{model_name}__average_sentiment.txt")
-    with open(output_file_path, "w") as file:
-        file.write("Average Sentiment for Liberal Sentences (TextBlob): " + str(average_liberal_sentiment_blob) + "\n")
-        file.write("Average Sentiment for Liberal Sentences (VADER): " + str(average_liberal_sentiment_vader) + "\n")
-        file.write("Average Sentiment for Conservative Sentences (TextBlob): " + str(average_conservative_sentiment_blob) + "\n")
-        file.write("Average Sentiment for Conservative Sentences (VADER): " + str(average_conservative_sentiment_vader) + "\n")
-
-    # Output maximum and minimum sentiment scores to file
-    output_file_path = os.path.join('sentiment', f"{model_name}_sentiment_scores.txt")
-    with open(output_file_path, "w") as file:
-        file.write("Maximum Sentiment for Liberal Sentences (TextBlob): " + str(max_liberal_sentiment_blob) + "\n")
-        file.write("Minimum Sentiment for Liberal Sentences (TextBlob): " + str(min_liberal_sentiment_blob) + "\n")
-        file.write("Maximum Sentiment for Liberal Sentences (VADER): " + str(max_liberal_sentiment_vader) + "\n")
-        file.write("Minimum Sentiment for Liberal Sentences (VADER): " + str(min_liberal_sentiment_vader) + "\n")
-        file.write("Maximum Sentiment for Conservative Sentences (TextBlob): " + str(max_conservative_sentiment_blob) + "\n")
-        file.write("Minimum Sentiment for Conservative Sentences (TextBlob): " + str(min_conservative_sentiment_blob) + "\n")
-        file.write("Maximum Sentiment for Conservative Sentences (VADER): " + str(max_conservative_sentiment_vader) + "\n")
-        file.write("Minimum Sentiment for Conservative Sentences (VADER): " + str(min_conservative_sentiment_vader) + "\n")
+    return vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage

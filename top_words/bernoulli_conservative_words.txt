@@ -1,11 +1,91 @@
 Top 10 words for classifying as 'conservative':
-Word: people
-Word: like
-Word: trump
-Word: new
-Word: think
-Word: right
-Word: want
-Word: know
-Word: say
-Word: work
+Word: people 
+Sentiment scores (VADER): 
+	Positive=53.54%, 
+	Neutral=7.67%, 
+	Negative=38.80%
+Sentiment scores (TextBlob): 
+	Positive=66.04%, 
+	Neutral=12.26%, 
+	Negative=21.70%
+Word: like 
+Sentiment scores (VADER): 
+	Positive=70.03%, 
+	Neutral=1.19%, 
+	Negative=28.78%
+Sentiment scores (TextBlob): 
+	Positive=72.15%, 
+	Neutral=9.15%, 
+	Negative=18.70%
+Word: new 
+Sentiment scores (VADER): 
+	Positive=45.91%, 
+	Neutral=17.71%, 
+	Negative=36.38%
+Sentiment scores (TextBlob): 
+	Positive=74.93%, 
+	Neutral=9.81%, 
+	Negative=15.26%
+Word: know 
+Sentiment scores (VADER): 
+	Positive=57.76%, 
+	Neutral=7.66%, 
+	Negative=34.58%
+Sentiment scores (TextBlob): 
+	Positive=71.91%, 
+	Neutral=9.63%, 
+	Negative=18.47%
+Word: say 
+Sentiment scores (VADER): 
+	Positive=45.68%, 
+	Neutral=15.86%, 
+	Negative=38.46%
+Sentiment scores (TextBlob): 
+	Positive=57.30%, 
+	Neutral=25.27%, 
+	Negative=17.43%
+Word: trump 
+Sentiment scores (VADER): 
+	Positive=28.93%, 
+	Neutral=29.84%, 
+	Negative=41.23%
+Sentiment scores (TextBlob): 
+	Positive=34.85%, 
+	Neutral=46.81%, 
+	Negative=18.34%
+Word: want 
+Sentiment scores (VADER): 
+	Positive=63.42%, 
+	Neutral=4.44%, 
+	Negative=32.14%
+Sentiment scores (TextBlob): 
+	Positive=71.04%, 
+	Neutral=14.16%, 
+	Negative=14.80%
+Word: think 
+Sentiment scores (VADER): 
+	Positive=57.83%, 
+	Neutral=8.47%, 
+	Negative=33.70%
+Sentiment scores (TextBlob): 
+	Positive=73.11%, 
+	Neutral=9.76%, 
+	Negative=17.13%
+Word: work 
+Sentiment scores (VADER): 
+	Positive=55.19%, 
+	Neutral=14.06%, 
+	Negative=30.75%
+Sentiment scores (TextBlob): 
+	Positive=62.94%, 
+	Neutral=20.37%, 
+	Negative=16.69%
+Word: right 
+Sentiment scores (VADER): 
+	Positive=43.52%, 
+	Neutral=15.68%, 
+	Negative=40.80%
+Sentiment scores (TextBlob): 
+	Positive=69.12%, 
+	Neutral=14.08%, 
+	Negative=16.80%
