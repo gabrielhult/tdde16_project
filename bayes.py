@@ -138,13 +138,13 @@ def sentiment_prediction(data, word):
     sentiments_vader = [get_sentiment_vader(sentence) for sentence in sentences]
 
     # Calculate the percentage of positive, neutral, and negative sentiments for VADER
-    vader_positive_percentage = sum(sentiment > 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
+    vader_positive_percentage = sum(sentiment > 0.1 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
     vader_neutral_percentage = sum(-0.1 <= sentiment <= 0.1 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
-    vader_negative_percentage = sum(sentiment < 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
+    vader_negative_percentage = sum(sentiment < -0.1 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
 
     # Calculate the percentage of positive, neutral, and negative sentiments for TextBlob
-    blob_positive_percentage = sum(sentiment > 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
+    blob_positive_percentage = sum(sentiment > 0.1 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
     blob_neutral_percentage = sum(-0.1 <= sentiment <= 0.1 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
-    blob_negative_percentage = sum(sentiment < 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
+    blob_negative_percentage = sum(sentiment < -0.1 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
 
     return vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, len(sentences)
