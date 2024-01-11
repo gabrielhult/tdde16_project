@@ -1,91 +1,101 @@
 Top 10 words for classifying as 'conservative':
 Word: trump 
 Sentiment scores (VADER): 
-	Positive=28.93%, 
-	Neutral=29.84%, 
-	Negative=41.23%
+	Positive=30.31%, 
+	Neutral=32.15%, 
+	Negative=40.68%
 Sentiment scores (TextBlob): 
-	Positive=34.85%, 
-	Neutral=46.81%, 
-	Negative=18.34%
+	Positive=36.75%, 
+	Neutral=62.73%, 
+	Negative=18.24%
+Number of matches: 762
 Word: people 
 Sentiment scores (VADER): 
-	Positive=53.54%, 
-	Neutral=7.67%, 
-	Negative=38.80%
+	Positive=54.10%, 
+	Neutral=8.55%, 
+	Negative=39.16%
 Sentiment scores (TextBlob): 
-	Positive=66.04%, 
-	Neutral=12.26%, 
-	Negative=21.70%
-Word: new 
-Sentiment scores (VADER): 
-	Positive=45.91%, 
-	Neutral=17.71%, 
-	Negative=36.38%
-Sentiment scores (TextBlob): 
-	Positive=74.93%, 
-	Neutral=9.81%, 
-	Negative=15.26%
-Word: like 
-Sentiment scores (VADER): 
-	Positive=70.03%, 
-	Neutral=1.19%, 
-	Negative=28.78%
-Sentiment scores (TextBlob): 
-	Positive=72.15%, 
-	Neutral=9.15%, 
-	Negative=18.70%
-Word: woman 
-Sentiment scores (VADER): 
-	Positive=34.44%, 
-	Neutral=10.00%, 
-	Negative=55.56%
-Sentiment scores (TextBlob): 
-	Positive=45.56%, 
-	Neutral=18.89%, 
-	Negative=35.56%
-Word: party 
-Sentiment scores (VADER): 
-	Positive=74.24%, 
-	Neutral=1.75%, 
-	Negative=24.02%
-Sentiment scores (TextBlob): 
-	Positive=64.63%, 
-	Neutral=20.96%, 
-	Negative=14.41%
+	Positive=67.47%, 
+	Neutral=51.69%, 
+	Negative=20.84%
+Number of matches: 830
 Word: biden 
 Sentiment scores (VADER): 
-	Positive=31.90%, 
-	Neutral=24.69%, 
-	Negative=43.40%
+	Positive=32.15%, 
+	Neutral=30.29%, 
+	Negative=40.78%
 Sentiment scores (TextBlob): 
-	Positive=31.44%, 
-	Neutral=45.71%, 
-	Negative=22.85%
-Word: social 
+	Positive=33.50%, 
+	Neutral=62.61%, 
+	Negative=20.98%
+Number of matches: 591
+Word: new 
 Sentiment scores (VADER): 
-	Positive=61.98%, 
-	Neutral=13.37%, 
-	Negative=24.65%
+	Positive=44.62%, 
+	Neutral=20.56%, 
+	Negative=36.50%
 Sentiment scores (TextBlob): 
-	Positive=71.59%, 
-	Neutral=13.23%, 
-	Negative=15.18%
-Word: worker 
+	Positive=75.10%, 
+	Neutral=43.36%, 
+	Negative=15.66%
+Number of matches: 715
+Word: like 
 Sentiment scores (VADER): 
-	Positive=52.69%, 
-	Neutral=13.47%, 
-	Negative=33.83%
+	Positive=69.04%, 
+	Neutral=2.71%, 
+	Negative=29.24%
 Sentiment scores (TextBlob): 
-	Positive=58.08%, 
-	Neutral=26.35%, 
-	Negative=15.57%
+	Positive=72.61%, 
+	Neutral=51.78%, 
+	Negative=17.83%
+Number of matches: 701
+Word: woman 
+Sentiment scores (VADER): 
+	Positive=33.33%, 
+	Neutral=13.10%, 
+	Negative=55.95%
+Sentiment scores (TextBlob): 
+	Positive=47.62%, 
+	Neutral=55.95%, 
+	Negative=30.95%
+Number of matches: 84
 Word: say 
 Sentiment scores (VADER): 
-	Positive=45.68%, 
-	Neutral=15.86%, 
-	Negative=38.46%
+	Positive=44.48%, 
+	Neutral=18.18%, 
+	Negative=39.94%
 Sentiment scores (TextBlob): 
-	Positive=57.30%, 
-	Neutral=25.27%, 
-	Negative=17.43%
+	Positive=58.44%, 
+	Neutral=54.38%, 
+	Negative=16.56%
+Number of matches: 616
+Word: party 
+Sentiment scores (VADER): 
+	Positive=75.00%, 
+	Neutral=3.88%, 
+	Negative=23.71%
+Sentiment scores (TextBlob): 
+	Positive=62.50%, 
+	Neutral=60.78%, 
+	Negative=15.52%
+Number of matches: 232
+Word: right 
+Sentiment scores (VADER): 
+	Positive=43.44%, 
+	Neutral=17.83%, 
+	Negative=41.49%
+Sentiment scores (TextBlob): 
+	Positive=70.02%, 
+	Neutral=51.54%, 
+	Negative=15.72%
+Number of matches: 617
+Word: think 
+Sentiment scores (VADER): 
+	Positive=56.80%, 
+	Neutral=10.43%, 
+	Negative=34.08%
+Sentiment scores (TextBlob): 
+	Positive=71.14%, 
+	Neutral=50.65%, 
+	Negative=16.95%
+Number of matches: 537

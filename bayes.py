@@ -96,9 +96,10 @@ def decisive_words(data, model, vectoriser, model_name):
         file.write(f"Top 10 words for classifying as 'liberal':\n")
         for word in liberal_top_words:
             file.write(f"Word: {word} \n")
-            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage = sentiment_prediction(data, word)
+            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, matches = sentiment_prediction(data, word)
             file.write(f"Sentiment scores (VADER): \n\tPositive={vader_positive_percentage:.2f}%, \n\tNeutral={vader_neutral_percentage:.2f}%, \n\tNegative={vader_negative_percentage:.2f}%\n")
             file.write(f"Sentiment scores (TextBlob): \n\tPositive={blob_positive_percentage:.2f}%, \n\tNeutral={blob_neutral_percentage:.2f}%, \n\tNegative={blob_negative_percentage:.2f}%\n")
+            file.write(f"Number of matches: {matches}\n")
 
     # Save the top words with their log probability differences for conservative to a text file
     output_file_path = os.path.join('top_words', f"{model_name}_conservative_words.txt")
@@ -106,9 +107,10 @@ def decisive_words(data, model, vectoriser, model_name):
         file.write(f"Top 10 words for classifying as 'conservative':\n")
         for word in conservative_top_words:
             file.write(f"Word: {word} \n")
-            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage = sentiment_prediction(data, word)
+            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, matches = sentiment_prediction(data, word)
             file.write(f"Sentiment scores (VADER): \n\tPositive={vader_positive_percentage:.2f}%, \n\tNeutral={vader_neutral_percentage:.2f}%, \n\tNegative={vader_negative_percentage:.2f}%\n")
             file.write(f"Sentiment scores (TextBlob): \n\tPositive={blob_positive_percentage:.2f}%, \n\tNeutral={blob_neutral_percentage:.2f}%, \n\tNegative={blob_negative_percentage:.2f}%\n")
+            file.write(f"Number of matches: {matches}\n")
 
     return liberal_top_words, conservative_top_words
 
@@ -118,7 +120,7 @@ def sentiment_prediction(data, word):
     rows_with_word = data[data['Title_Text'].str.contains(word, case=False)]
 
     # Extract sentences with the specific word
-    sentences = rows_with_word['Title_Text'].tolist()
+    sentences = list(set(rows_with_word['Title_Text'].tolist()))
 
     # Perform sentiment analysis using TextBlob
     def get_sentiment_textblob(sentence):
@@ -137,12 +139,12 @@ def sentiment_prediction(data, word):
 
     # Calculate the percentage of positive, neutral, and negative sentiments for VADER
     vader_positive_percentage = sum(sentiment > 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
-    vader_neutral_percentage = sum(sentiment == 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
+    vader_neutral_percentage = sum(-0.1 <= sentiment <= 0.1 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
     vader_negative_percentage = sum(sentiment < 0 for sentiment in sentiments_vader) / len(sentiments_vader) * 100
 
     # Calculate the percentage of positive, neutral, and negative sentiments for TextBlob
     blob_positive_percentage = sum(sentiment > 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
-    blob_neutral_percentage = sum(sentiment == 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
+    blob_neutral_percentage = sum(-0.1 <= sentiment <= 0.1 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
     blob_negative_percentage = sum(sentiment < 0 for sentiment in sentiments_blob) / len(sentiments_blob) * 100
 
-    return vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage
+    return vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, len(sentences)

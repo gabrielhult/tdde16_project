@@ -1,91 +1,101 @@
 Top 10 words for classifying as 'liberal':
 Word: trump 
 Sentiment scores (VADER): 
-	Positive=28.93%, 
-	Neutral=29.84%, 
-	Negative=41.23%
+	Positive=30.31%, 
+	Neutral=32.15%, 
+	Negative=40.68%
 Sentiment scores (TextBlob): 
-	Positive=34.85%, 
-	Neutral=46.81%, 
-	Negative=18.34%
+	Positive=36.75%, 
+	Neutral=62.73%, 
+	Negative=18.24%
+Number of matches: 762
 Word: biden 
 Sentiment scores (VADER): 
-	Positive=31.90%, 
-	Neutral=24.69%, 
-	Negative=43.40%
+	Positive=32.15%, 
+	Neutral=30.29%, 
+	Negative=40.78%
 Sentiment scores (TextBlob): 
-	Positive=31.44%, 
-	Neutral=45.71%, 
-	Negative=22.85%
+	Positive=33.50%, 
+	Neutral=62.61%, 
+	Negative=20.98%
+Number of matches: 591
 Word: ukraine 
 Sentiment scores (VADER): 
-	Positive=26.36%, 
-	Neutral=22.33%, 
-	Negative=51.31%
+	Positive=25.99%, 
+	Neutral=23.13%, 
+	Negative=51.54%
 Sentiment scores (TextBlob): 
-	Positive=31.59%, 
-	Neutral=51.71%, 
-	Negative=16.70%
+	Positive=32.38%, 
+	Neutral=70.70%, 
+	Negative=17.18%
+Number of matches: 454
 Word: capitalism 
 Sentiment scores (VADER): 
-	Positive=54.07%, 
-	Neutral=15.66%, 
-	Negative=30.27%
+	Positive=53.38%, 
+	Neutral=17.72%, 
+	Negative=30.38%
 Sentiment scores (TextBlob): 
-	Positive=59.29%, 
-	Neutral=22.76%, 
-	Negative=17.95%
-Word: people 
-Sentiment scores (VADER): 
-	Positive=53.54%, 
-	Neutral=7.67%, 
-	Negative=38.80%
-Sentiment scores (TextBlob): 
-	Positive=66.04%, 
-	Neutral=12.26%, 
-	Negative=21.70%
+	Positive=62.03%, 
+	Neutral=54.01%, 
+	Negative=16.24%
+Number of matches: 474
 Word: russia 
 Sentiment scores (VADER): 
-	Positive=33.51%, 
-	Neutral=14.95%, 
-	Negative=51.53%
+	Positive=34.24%, 
+	Neutral=17.90%, 
+	Negative=51.56%
 Sentiment scores (TextBlob): 
-	Positive=36.22%, 
-	Neutral=42.70%, 
-	Negative=21.08%
-Word: government 
+	Positive=37.55%, 
+	Neutral=74.32%, 
+	Negative=19.26%
+Number of matches: 514
+Word: people 
 Sentiment scores (VADER): 
-	Positive=54.68%, 
-	Neutral=7.41%, 
-	Negative=37.91%
+	Positive=54.10%, 
+	Neutral=8.55%, 
+	Negative=39.16%
 Sentiment scores (TextBlob): 
-	Positive=66.23%, 
-	Neutral=11.98%, 
-	Negative=21.79%
+	Positive=67.47%, 
+	Neutral=51.69%, 
+	Negative=20.84%
+Number of matches: 830
 Word: putin 
 Sentiment scores (VADER): 
-	Positive=29.89%, 
-	Neutral=22.88%, 
-	Negative=47.23%
+	Positive=31.20%, 
+	Neutral=24.79%, 
+	Negative=47.01%
 Sentiment scores (TextBlob): 
-	Positive=31.73%, 
-	Neutral=45.39%, 
-	Negative=22.88%
+	Positive=32.91%, 
+	Neutral=69.66%, 
+	Negative=20.94%
+Number of matches: 234
+Word: government 
+Sentiment scores (VADER): 
+	Positive=53.50%, 
+	Neutral=8.80%, 
+	Negative=39.05%
+Sentiment scores (TextBlob): 
+	Positive=65.01%, 
+	Neutral=56.21%, 
+	Negative=21.22%
+Number of matches: 443
 Word: say 
 Sentiment scores (VADER): 
-	Positive=45.68%, 
-	Neutral=15.86%, 
-	Negative=38.46%
+	Positive=44.48%, 
+	Neutral=18.18%, 
+	Negative=39.94%
 Sentiment scores (TextBlob): 
-	Positive=57.30%, 
-	Neutral=25.27%, 
-	Negative=17.43%
+	Positive=58.44%, 
+	Neutral=54.38%, 
+	Negative=16.56%
+Number of matches: 616
 Word: desantis 
 Sentiment scores (VADER): 
-	Positive=27.59%, 
-	Neutral=38.62%, 
-	Negative=33.79%
+	Positive=28.57%, 
+	Neutral=40.60%, 
+	Negative=34.59%
 Sentiment scores (TextBlob): 
-	Positive=24.83%, 
-	Neutral=58.62%, 
-	Negative=16.55%
+	Positive=24.81%, 
+	Neutral=68.42%, 
+	Negative=15.79%
+Number of matches: 133
