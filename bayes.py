@@ -90,13 +90,21 @@ def decisive_words(data, model, vectoriser, model_name):
     print("Top words for Liberal:", liberal_top_words)
     print("Top words for Conservative:", conservative_top_words)
 
+    def divide_dataset_by_lean(data):
+        print(data.head())
+        liberal_data = data[data['Political Lean'] == 'Liberal']
+        conservative_data = data[data['Political Lean'] == 'Conservative']
+        return liberal_data, conservative_data
+
+    liberal_data, conservative_data = divide_dataset_by_lean(data)
+
     # Save the top words with their log probability differences for liberal to a text file
     output_file_path = os.path.join('top_words', f"{model_name}_liberal_words.txt")
     with open(output_file_path, "w") as file:
         file.write(f"Top 10 words for classifying as 'liberal':\n")
         for word in liberal_top_words:
             file.write(f"Word: {word} \n")
-            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, matches = sentiment_prediction(data, word)
+            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, matches = sentiment_prediction(liberal_data, word)
             file.write(f"Sentiment scores (VADER): \n\tPositive={vader_positive_percentage:.2f}%, \n\tNeutral={vader_neutral_percentage:.2f}%, \n\tNegative={vader_negative_percentage:.2f}%\n")
             file.write(f"Sentiment scores (TextBlob): \n\tPositive={blob_positive_percentage:.2f}%, \n\tNeutral={blob_neutral_percentage:.2f}%, \n\tNegative={blob_negative_percentage:.2f}%\n")
             file.write(f"Number of matches: {matches}\n")
@@ -107,7 +115,7 @@ def decisive_words(data, model, vectoriser, model_name):
         file.write(f"Top 10 words for classifying as 'conservative':\n")
         for word in conservative_top_words:
             file.write(f"Word: {word} \n")
-            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, matches = sentiment_prediction(data, word)
+            vader_positive_percentage, vader_neutral_percentage, vader_negative_percentage, blob_positive_percentage, blob_neutral_percentage, blob_negative_percentage, matches = sentiment_prediction(conservative_data, word)
             file.write(f"Sentiment scores (VADER): \n\tPositive={vader_positive_percentage:.2f}%, \n\tNeutral={vader_neutral_percentage:.2f}%, \n\tNegative={vader_negative_percentage:.2f}%\n")
             file.write(f"Sentiment scores (TextBlob): \n\tPositive={blob_positive_percentage:.2f}%, \n\tNeutral={blob_neutral_percentage:.2f}%, \n\tNegative={blob_negative_percentage:.2f}%\n")
             file.write(f"Number of matches: {matches}\n")
